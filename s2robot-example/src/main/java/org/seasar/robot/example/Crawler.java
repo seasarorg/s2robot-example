@@ -3,9 +3,9 @@ package org.seasar.robot.example;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.robot.S2Robot;
-import org.seasar.robot.db.AccessResultCallback;
-import org.seasar.robot.db.exentity.AccessResult;
+import org.seasar.robot.entity.AccessResult;
 import org.seasar.robot.service.DataService;
+import org.seasar.robot.util.AccessResultCallback;
 
 public class Crawler {
     public static void main(String[] args) {
