@@ -1,4 +1,4 @@
-package org.seasar.robot.example;
+package org.seasar.robot.seo;
 
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
