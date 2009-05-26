@@ -3,6 +3,9 @@
   <classpathentry kind="src" path="src/main/resources"/>
   <classpathentry kind="output" path="target/classes"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-annotation_1.0_spec/1.0/geronimo-annotation_1.0_spec-1.0.jar" sourcepath="M2_REPO/org/apache/geronimo/specs/geronimo-annotation_1.0_spec/1.0/geronimo-annotation_1.0_spec-1.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-ejb_3.0_spec/1.0/geronimo-ejb_3.0_spec-1.0.jar" sourcepath="M2_REPO/org/apache/geronimo/specs/geronimo-ejb_3.0_spec/1.0/geronimo-ejb_3.0_spec-1.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-interceptor_3.0_spec/1.0/geronimo-interceptor_3.0_spec-1.0.jar" sourcepath="M2_REPO/org/apache/geronimo/specs/geronimo-interceptor_3.0_spec/1.0/geronimo-interceptor_3.0_spec-1.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-jta_1.1_spec/1.0/geronimo-jta_1.1_spec-1.0.jar" sourcepath="M2_REPO/org/apache/geronimo/specs/geronimo-jta_1.1_spec/1.0/geronimo-jta_1.1_spec-1.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/seasar/robot/s2-robot-db/0.1.0-SNAPSHOT/s2-robot-db-0.1.0-SNAPSHOT.jar" sourcepath="M2_REPO/org/seasar/robot/s2-robot-db/0.1.0-SNAPSHOT/s2-robot-db-0.1.0-SNAPSHOT-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/seasar/robot/s2-robot/0.1.0-SNAPSHOT/s2-robot-0.1.0-SNAPSHOT.jar" sourcepath="M2_REPO/org/seasar/robot/s2-robot/0.1.0-SNAPSHOT/s2-robot-0.1.0-SNAPSHOT-sources.jar"/>
