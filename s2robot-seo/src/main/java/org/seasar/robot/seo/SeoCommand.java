@@ -3,11 +3,10 @@ package org.seasar.robot.seo;
 import org.seasar.framework.container.S2Container;
 import org.seasar.framework.container.factory.SingletonS2ContainerFactory;
 import org.seasar.robot.S2Robot;
-import org.seasar.robot.entity.AccessResult;
-import org.seasar.robot.service.DataService;
-import org.seasar.robot.util.AccessResultCallback;
+import org.seasar.robot.seo.service.ReportService;
 
-public class SeoTool {
+public class SeoCommand {
+
     public static void main(String[] args) {
         SingletonS2ContainerFactory.init();
         S2Container container = SingletonS2ContainerFactory.getContainer();
@@ -28,6 +27,7 @@ public class SeoTool {
         S2Robot s2Robot = (S2Robot) container.getComponent(S2Robot.class);
         // add url
         s2Robot.addUrl(url);
+        s2Robot.addIncludeFilter(url + ".*");
         // depth
         s2Robot.getRobotConfig().setMaxDepth(depth);
 
@@ -36,17 +36,13 @@ public class SeoTool {
         String sessionId = s2Robot.execute();
         System.out.println("Finished: " + sessionId);
 
-        // print urls
-        DataService dataService = (DataService) container
-                .getComponent(DataService.class);
-        System.out.println("Crawled URLs: ");
-        dataService.iterate(sessionId, new AccessResultCallback() {
-            public void iterate(AccessResult accessResult) {
-                System.out.println(accessResult.getUrl());
-            }
-        });
+        // create report
+        ReportService reportService = (ReportService) container
+                .getComponent(ReportService.class);
+        reportService.report("result.csv", sessionId); //TODO filename
 
         // clean up
         s2Robot.cleanup(sessionId);
     }
+
 }

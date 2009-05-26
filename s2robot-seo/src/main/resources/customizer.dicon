@@ -4,6 +4,16 @@
 <components>
     <include path="default-customizer.dicon"/>
 
-
+    <component name="serviceCustomizer"
+        class="org.seasar.framework.container.customizer.CustomizerChain">
+        <initMethod name="addAspectCustomizer">
+            <arg>"aop.traceInterceptor"</arg>
+        </initMethod>
+        <initMethod name="addCustomizer">
+            <arg>
+                <component class="org.seasar.framework.container.customizer.TxAttributeCustomizer"/>
+            </arg>
+        </initMethod>
+    </component>
 
 </components>
