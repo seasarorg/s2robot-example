@@ -10,5 +10,5 @@ for file in `ls $LIB_DIR/*.jar` ; do
     CP_PATH="$CP_PATH:$file"
 done
 
-java -cp $CP_PATH org.seasar.robot.seo.SeoCommand $@
+java -cp $CP_PATH org.seasar.robot.seo.SeoCommand "$@"
 

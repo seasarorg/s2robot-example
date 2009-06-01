@@ -58,6 +58,8 @@ public class ReportService {
                     buf.append(accessResult.getUrl());
                     buf.append(',');
                     buf.append(getLinkStatus(accessResult));
+                    buf.append(',');
+                    buf.append(accessResult.getExecutionTime() + "msec");
 
                     try {
                         writer.write(buf.toString());
