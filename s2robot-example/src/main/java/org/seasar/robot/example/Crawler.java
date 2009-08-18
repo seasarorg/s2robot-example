@@ -29,7 +29,7 @@ public class Crawler {
         // add url
         s2Robot.addUrl(url);
         // depth
-        s2Robot.getRobotConfig().setMaxDepth(depth);
+        s2Robot.getRobotContext().setMaxDepth(depth);
 
         // run s2robot
         System.out.println("Starting S2Robot.. ");
