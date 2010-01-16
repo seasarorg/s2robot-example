@@ -4,7 +4,7 @@
   <groupId>org.seasar.robot.example</groupId>
   <artifactId>s2robot-example</artifactId>
   <packaging>jar</packaging>
-  <version>0.1.0</version>
+  <version>0.3.0</version>
   <name>s2robot-example</name>
   <build>
     <pluginManagement>
@@ -38,19 +38,6 @@
             </configuration>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.seasar.dbflute</groupId>
-        <artifactId>maven-dbflute-plugin</artifactId>
-        <version>0.1.0</version>
-        <configuration>
-          <dbfluteVersion>0.9.4.1</dbfluteVersion>
-          <rootPackage>org.seasar.robot</rootPackage>
-          <dbPackage>org.seasar.robot.db</dbPackage>
-          <schemaName>robot</schemaName>
-          <schemaFile>${basedir}/dbflute/schema/project-schema-robot.xml</schemaFile>
-          <databaseUrl>jdbc:h2:file:${basedir}/src/main/db/robot</databaseUrl>
-        </configuration>
       </plugin>
     </plugins>
   </build>
@@ -96,8 +83,13 @@
     </dependency>
     <dependency>
       <groupId>org.seasar.robot</groupId>
+      <artifactId>s2-robot-db-h2</artifactId>
+      <version>0.3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seasar.robot</groupId>
       <artifactId>s2-robot-db</artifactId>
-      <version>0.1.0</version>
+      <version>0.3.0</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
