@@ -4,7 +4,7 @@
   <groupId>org.seasar.robot.example</groupId>
   <artifactId>s2robot-example</artifactId>
   <packaging>jar</packaging>
-  <version>0.4.2</version>
+  <version>0.5.4</version>
   <name>s2robot-example</name>
   <build>
     <pluginManagement>
@@ -59,6 +59,11 @@
       <name>The Seasar Foundation Maven2 Repository</name>
       <url>http://maven.seasar.org/maven2</url>
     </repository>
+    <repository>
+      <id>maven-snapshot.seasar.org</id>
+      <name>The Seasar Foundation Maven2 Repository</name>
+      <url>http://maven.seasar.org/maven2-snapshot</url>
+    </repository>
   </repositories>
   <dependencies>
     <dependency>
@@ -84,12 +89,12 @@
     <dependency>
       <groupId>org.seasar.robot</groupId>
       <artifactId>s2-robot-db-h2</artifactId>
-      <version>0.4.2</version>
+      <version>0.5.4</version>
     </dependency>
     <dependency>
       <groupId>org.seasar.robot</groupId>
       <artifactId>s2-robot-db</artifactId>
-      <version>0.4.2</version>
+      <version>0.5.4</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
