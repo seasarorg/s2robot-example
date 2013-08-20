@@ -44,6 +44,7 @@ public class ReportService {
 
     public String charsetName = "UTF-8";
 
+    // pathのファイルににクロールしたURL、HTTPステータス、取得にかかった時間を書き出す
     public void report(String path, String sessionId) {
         File file = new File(path);
         BufferedWriter bw = null;
@@ -73,16 +74,20 @@ public class ReportService {
 
             bw.flush();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("Failed to print the result.", e);
         } finally {
             IOUtils.closeQuietly(bw);
         }
     }
 
     protected String getLinkStatus(AccessResult accessResult) {
-        if (accessResult.getHttpStatusCode() == Constants.HTTP_STATUS_OK) {
+        Integer statusCode = accessResult.getHttpStatusCode();
+        if (statusCode == null) {
+            return "FAILED";
+        } else if (statusCode.intValue() == Constants.HTTP_STATUS_OK) {
             return "OK";
+        } else if (statusCode >= 300 && statusCode < 400) {
+            return "REDIRECT";
         } else {
             return "FAILED";
         }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//SEASAR//DTD S2Container 2.4//EN"
+	"http://www.seasar.org/dtd/components24.dtd">
+<components>
+    <include path="s2robot_transformer.dicon"/>
+    
+	<component name="ruleManager" class="org.seasar.robot.rule.impl.RuleManagerImpl" instance="prototype">
+		<initMethod name="addRule">
+			<arg>sitemapsRule</arg>
+		</initMethod>
+		<initMethod name="addRule">
+			<arg>fileRule</arg>
+		</initMethod>
+	</component>
+	
+	<component name="sitemapsRule" class="org.seasar.robot.rule.impl.RegexRule" >
+		<property name="ruleId">"sitemapsRule"</property>
+		<property name="responseProcessor">
+			<component class="org.seasar.robot.processor.impl.SitemapsResponseProcessor">
+			</component>
+		</property>
+		<initMethod name="addRule">
+			<arg>"url"</arg>
+			<arg>".*sitemap[^/]*.xml$|.*sitemap[^/]*.gz$|.*sitemap[^/]*.txt$"</arg>
+		</initMethod>
+	</component>
+	
+	<component name="fileRule" class="org.seasar.robot.rule.impl.RegexRule" >
+		<property name="ruleId">"fileRule"</property>
+		<property name="defaultRule">true</property>
+		<property name="responseProcessor">
+			<component class="org.seasar.robot.processor.impl.DefaultResponseProcessor">
+				<property name="transformer">customTransformer</property>
+			</component>
+		</property>
+	</component>
+</components>

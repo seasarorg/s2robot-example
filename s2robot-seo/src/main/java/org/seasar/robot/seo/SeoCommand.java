@@ -17,15 +17,19 @@ public class SeoCommand {
 
     private static int depth;
 
+    private static int count;
+    
+    private static int numOfThread;
+
     private static Options options;
 
     private static CommandLineParser parser;
 
     private static String outputFilename;
 
-    private static String includeRegexp;
+    private static String includeRegexps;
 
-    private static String excludeRegexp;
+    private static String excludeRegexps;
 
     private static final String USAGE = "./run.sh [options] -u <url>";
 
@@ -37,33 +41,47 @@ public class SeoCommand {
 
         System.out.println("URL: " + url);
         System.out.println("Depth: " + depth);
+        System.out.println("Size: " + count);
+        // S2Robotのコンポーネントを取得
         S2Robot s2Robot = (S2Robot) container.getComponent(S2Robot.class);
-        // add url
+        // クロール対象のURLの取得
         s2Robot.addUrl(url);
-        s2Robot.addIncludeFilter(url + includeRegexp);
-        if (excludeRegexp != null) {
-            s2Robot.addExcludeFilter(url + excludeRegexp);
+        // クロール対象のURLを正規表現で設定
+        for (String includeRegexp : includeRegexps.split(",")) {
+            s2Robot.addIncludeFilter(includeRegexp);
         }
-        // depth
-        s2Robot.getRobotConfig().setMaxDepth(depth);
+        if (excludeRegexps != null) {
+            // クロールを除外するURLを正規表現で設定
+            for (String excludeRegexp : excludeRegexps.split(",")) {
+                s2Robot.addExcludeFilter(url + excludeRegexp);
+            }
+        }
+        // クロールする深さの設定
+        s2Robot.setMaxDepth(depth);
+        // クロールするファイル数の設定
+        s2Robot.setMaxAccessCount(count);
+        // クロールするスレッド数の設定
+        s2Robot.setNumOfThread(numOfThread);
 
-        // run s2robot
+        // クロールを開始
         System.out.println("Starting S2Robot.. ");
         String sessionId = s2Robot.execute();
         System.out.println("Finished: " + sessionId);
 
-        // create report
+        // 結果の出力
         ReportService reportService = (ReportService) container
                 .getComponent(ReportService.class);
         reportService.report(outputFilename, sessionId);
 
-        // clean up
+        // クロールデータの削除
         s2Robot.cleanup(sessionId);
     }
 
     private static void addOptions() {
         options = new Options();
         options.addOption("d", "depth", true, "depth");
+        options.addOption("c", "count", true, "count");
+        options.addOption("t", "thread", true, "num of thread");
         options.addOption("h", "help", false, "print help");
         options.addOption("o", "output", true,
                 "name of output csv file (default: result.csv)");
@@ -95,7 +113,19 @@ public class SeoCommand {
                 if (line.hasOption("d")) {
                     depth = Integer.parseInt(line.getOptionValue("d"));
                 } else {
-                    depth = 0;
+                    depth = -1;
+                }
+                // count
+                if (line.hasOption("c")) {
+                    count = Integer.parseInt(line.getOptionValue("c"));
+                } else {
+                    count = 0;
+                }
+                // numOfThread
+                if (line.hasOption("t")) {
+                    numOfThread = Integer.parseInt(line.getOptionValue("t"));
+                } else {
+                    numOfThread = 1;
                 }
                 // output file
                 if (line.hasOption("o")) {
@@ -105,13 +135,13 @@ public class SeoCommand {
                 }
                 // include filter
                 if (line.hasOption("i")) {
-                    includeRegexp = line.getOptionValue("i");
+                    includeRegexps = line.getOptionValue("i");
                 } else {
-                    includeRegexp = ".*";
+                    includeRegexps = url + ".*";
                 }
                 // exclude filter
                 if (line.hasOption("e")) {
-                    excludeRegexp = line.getOptionValue("e");
+                    excludeRegexps = line.getOptionValue("e");
                 }
             }
         } catch (ParseException exp) {
